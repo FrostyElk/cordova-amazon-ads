@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="se.frostyelk.cordova.amazon.ads" version="0.0.1">
+	<name>Cordova Amazon Ads</name>
+	<description>Cordova plugin for Amazon Ads. Supports Interstitial Ads</description>
+	<author>Arne Sikstrom</author>
+	<license>Apache License, Version 2.0</license>
+	<keywords>ad,amazon</keywords>
+	<repo>https://github.com/FrostyElk</repo>
+	<issue>https://github.com/FrostyElk</issue>
+
+	<engines>
+		<engine name="cordova" version=">=3.3.0" />
+	</engines>
+
+	<js-module src="www/AmazonAds.js" name="AmazonAds">
+		<clobbers target="AmazonAds" />
+	</js-module>
+
+
+	<platform name="android">
+		<source-file src="libs/amazon-ads-5.4.78.jar" target-dir="libs" />
+		<!--		<dependency id="se.frostyelk.cordova.plugin.amazonsdk" version=">=0.0.1"/>-->
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="AmazonAds">
+				<param name="android-package" value="se.frostyelk.cordova.amazon.ads.AmazonAds" />
+			</feature>
+		</config-file>
+
+		<!--		se.frostyelk.cordova.plugin.amasonads-->
+
+		<config-file target="AndroidManifest.xml" parent="application">
+			<activity android:name="com.amazon.device.ads.AdActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+		</config-file>
+
+		<source-file src="src/android/se/frostyelk/cordova/amazon/ads/AmazonAds.java" target-dir="src/se/frostyelk/cordova/amazon/ads" />
+
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<!-- Mandatory permissions  -->
+			<uses-permission android:name="android.permission.INTERNET" />
+			<!-- Additional permissions recommended by Amazon -->
+			<uses-permission android:name="android.permission.FINE_LOCATION" />
+			<uses-permission android:name="android.permission.COURSE_LOCATION" />
+			<uses-permission android:name="android.permission.NETWORK_STATE" />
+			<uses-permission android:name="android.permission.WIFI_STATE" />
+		</config-file>
+
+	</platform>
+</plugin>
